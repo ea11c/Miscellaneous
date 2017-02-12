@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/main_menu"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Main Menu" />
+        <item
+            android:id="@+id/add_item"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Add Drink" />
+        <item
+            android:id="@+id/view_recipes"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="View Recipes" />
+        <item
+            android:id="@+id/view_drinks"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="View Cabinet" />
+
+    </group>
+
+</menu>
