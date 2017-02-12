@@ -1,0 +1,97 @@
+*Query to get the names of monsters that drop material required to make swords
+*Editing the RecipeID # will allow for variation of which recipes to filter by
+
+SELECT MonsterID, Name FROM Monster 
+WHERE MonsterID IN (SELECT MonsterID FROM LootTable 
+WHERE ItemID IN (SELECT ItemID FROM RecipeIngredients WHERE RecipeID < 15));
+
++-----------+---------------+
+| MonsterID | Name          |
++-----------+---------------+
+|        19 | vagabond      |
+|        20 | bandit        |
+|        21 | highway man   |
+|        22 | rebel         |
+|        23 | bandit chief  |
+|        25 | town guard    |
+|        26 | foot soldier  |
+|        27 | elite soldier |
++-----------+---------------+
+___________________________________________________________
+*Query to see all available recipes of quality 7
+*Editing the quality will allow for different recipes to be shown
+
+SELECT * FROM Recipe
+WHERE Quality = 7;
+
++----------+--------------------+---------+
+| RecipeID | Name               | Quality |
++----------+--------------------+---------+
+|        7 | infernite 1h sword |       7 |
+|       14 | infernite 2h sword |       7 |
+|       21 | infernite 1h axe   |       7 |
+|       28 | infernite 2h axe   |       7 |
+|       35 | infernite 1h mace  |       7 |
+|       42 | infernite 2h mace  |       7 |
+|       49 | infernite polearm  |       7 |
+|       56 | infernite whip     |       7 |
+|       63 | infernite dagger   |       7 |
+|       70 | infernite fist     |       7 |
+|       77 | aesirwood staff    |       7 |
+|       84 | aesirwood bow      |       7 |
+|       91 | aesirwood crossbow |       7 |
++----------+--------------------+---------+
+_____________________________________________________________
+*Query to get all recipes that infernite is used in
+*Editing the ItemID will get all recipes for different items
+
+SELECT RecipeID, Name FROM RECIPE
+JOIN RecipeIngredients AS a USING(RecipeID)
+WHERE a.ItemID = 20;
+
++----------+--------------------+
+| RecipeID | Name               |
++----------+--------------------+
+|        7 | infernite 1h sword |
+|       14 | infernite 2h sword |
+|       21 | infernite 1h axe   |
+|       28 | infernite 2h axe   |
+|       35 | infernite 1h mace  |
+|       42 | infernite 2h mace  |
+|       49 | infernite polearm  |
+|       56 | infernite whip     |
+|       63 | infernite dagger   |
+|       70 | infernite fist     |
+|       77 | aesirwood staff    |
+|       84 | aesirwood bow      |
+|       91 | aesirwood crossbow |
++----------+--------------------+
+___________________________________________________________
+*Query to see the average quantity of each item for all recipes
+*Editing the aggregate function to MIN or MAX will allow for seeing the minimum or maximum quantities
+ required to succesfully craft a recipe.  Add RecipeID before ItemID when using MIN or MAX to see the recipe
+
+SELECT ItemID, AVG(Quantity)
+FROM RecipeIngredients
+GROUP BY ItemID;
+
++--------+---------------+
+| ItemID | AVG(Quantity) |
++--------+---------------+
+|      2 |        3.2500 |
+|      7 |        2.6923 |
+|      8 |        2.6923 |
+|      9 |        2.6923 |
+|     10 |        2.7692 |
+|     11 |        2.6923 |
+|     12 |        2.6923 |
+|     13 |        2.6923 |
+|     14 |        2.7692 |
+|     15 |        2.7692 |
+|     16 |        2.7692 |
+|     17 |        2.7692 |
+|     18 |        2.7692 |
+|     19 |        2.7692 |
+|     20 |        2.7692 |
+|     29 |        9.0000 |
++--------+---------------+
